@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="navbar bg-base-300">
+  <div class="navbar bg-neutral">
     <!-- menu -->
     <div class="navbar-start lg:hidden">
       <div class="dropdown">
