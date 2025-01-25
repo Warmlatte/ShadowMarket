@@ -1,9 +1,15 @@
 <script setup>
-import Test from '@/components/TestSection.vue'
+import Navbar from '@/components/NavbarComponent.vue'
+import Notice from '@/components/NoticeSection.vue'
+import MarketPlace from '@/components/MarketPlaceSection.vue'
+import Footer from '@/components/FooterComponent.vue'
 </script>
 
 <template>
-  <Test />
+  <Navbar />
+  <Notice />
+  <MarketPlace />
+  <Footer />
 </template>
 
 <style scoped></style>
