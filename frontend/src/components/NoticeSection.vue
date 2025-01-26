@@ -50,14 +50,14 @@
           <!-- small -->
           <div class="md:hidden lg:hidden text-md text-red-500">
             <p class="mb-1">
-              <strong>🚫 禁止購買爆炸物</strong>
+              <strong>💥 禁止購買爆炸物</strong>
             </p>
             <p>無法保證交易過後的安全性！</p>
           </div>
           <!-- large -->
           <div class="hidden md:block lg:block">
             <p class="text-lg text-red-500">
-              <strong>🚫 禁止購買爆炸物：</strong>
+              <strong>💥 禁止購買爆炸物：</strong>
               無法保證交易過後的安全性！
             </p>
           </div>
