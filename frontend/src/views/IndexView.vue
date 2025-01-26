@@ -1,7 +1,7 @@
 <script setup>
 import Navbar from '@/components/NavbarComponent.vue'
 import Notice from '@/components/NoticeSection.vue'
-import MarketPlace from '@/components/MarketPlaceSection.vue'
+import MarketPlace from '@/components/MarketplaceSection.vue'
 import Footer from '@/components/FooterComponent.vue'
 </script>
 

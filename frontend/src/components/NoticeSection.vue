@@ -28,7 +28,7 @@
                 href="https://5eclone.pingstudio.tw/items.html#%e4%b8%80%e7%9b%92%e7%b6%a0%e6%9d%be%e7%9f%b3%e5%88%b6%e7%9a%84%e5%8b%95%e7%89%a9%e9%9b%95%e5%83%8f_dmg"
                 target="_blank"
               >
-                5etools中文版
+                5etools 中文版
               </a>
             </p>
           </div>
@@ -42,7 +42,7 @@
                 href="https://5eclone.pingstudio.tw/items.html#%e4%b8%80%e7%9b%92%e7%b6%a0%e6%9d%be%e7%9f%b3%e5%88%b6%e7%9a%84%e5%8b%95%e7%89%a9%e9%9b%95%e5%83%8f_dmg"
                 target="_blank"
               >
-                5etools中文版
+                5etools 中文版
               </a>
             </p>
           </div>
