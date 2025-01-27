@@ -1,7 +1,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-import { passwordSmallTalk } from '@/data/smallTalk'
+import { passwordSmallTalk, errorSmallTalk } from '@/data/smallTalk'
+import * as AlertController from '@/utils/alertController'
 
 const router = useRouter()
 
@@ -15,6 +16,12 @@ const openModal = () => {
 }
 
 const verifyPassword = () => {
+  if (passwordValue.value !== '123') {
+    errorSmallTalk.value = errorSmallTalk[Math.floor(Math.random() * errorSmallTalk.length)]
+    AlertController.showError(errorSmallTalk.value)
+    return
+  }
+  AlertController.showSuccess('密碼正確，歡迎回來 (´∀｀)♡')
   router.push('/management')
   passwordValue.value = ''
   passwordModal.value.close()
