@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Item {
+  id         String  @id @default(uuid()) @db.Char(36) // 主鍵 UUID
+  name       String  // 道具名稱
+  type       String  // 道具類型
+  effect     String  // 道具效果
+  price      Float   // 價格
+  weight     Float   // 重量
+  rarity     String  // 稀有度
+  detail_url String  // 詳情網址
+}
