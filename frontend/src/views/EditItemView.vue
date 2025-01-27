@@ -5,7 +5,7 @@ import Footer from '@/components/FooterComponent.vue'
 </script>
 
 <template>
-  <Navbar />
+  <Navbar class="sticky top-0 z-50" />
   <EditItem />
   <Footer />
 </template>
