@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { deleteSmallTalk } from '@/data/smallTalk'
+import * as AlertController from '@/utils/alertController'
 
 // Random Small Talk
 const currentSmallTalk = ref('')
@@ -12,6 +13,7 @@ const openModal = () => {
 }
 
 const submitForm = () => {
+  AlertController.showSuccess('刪除成功 (๑•̀ω•́๑)')
   deleteModal.value.close()
 }
 </script>
