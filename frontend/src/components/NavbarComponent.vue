@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import AddModal from './Items/AddModal.vue'
 </script>
 
 <template>
@@ -100,22 +101,7 @@ import { RouterLink } from 'vue-router'
           />
         </svg>
       </RouterLink>
-      <!-- ADD -->
-      <button to="/management" class="btn btn-ghost btn-circle">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          x="0px"
-          y="0px"
-          class="h-5 w-5"
-          viewBox="0 0 24 24"
-          style="fill: #b2ccd6"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"
-          ></path>
-        </svg>
-      </button>
+      <AddModal />
     </div>
   </div>
 </template>
