@@ -14,12 +14,12 @@ datasource db {
 }
 
 model Item {
-  id         String  @id @default(uuid()) @db.Char(36) // 主鍵 UUID
-  name       String  // 道具名稱
-  type       String  // 道具類型
-  effect     String  // 道具效果
-  price      Float   // 價格
-  weight     Float   // 重量
-  rarity     String  // 稀有度
-  detail_url String  // 詳情網址
+  id         String  @id @default(uuid()) @db.Char(36) 
+  name       String  
+  type       String  
+  effect     String  
+  price      Float   
+  weight     Float   
+  rarity     String  
+  detail_url String  
 }
