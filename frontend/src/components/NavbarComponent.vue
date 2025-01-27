@@ -82,6 +82,7 @@ import AddModal from './Items/AddModal.vue'
           </svg>
         </button>
       </div>
+      <AddModal />
       <RouterLink to="/management" class="btn btn-ghost btn-circle">
         <svg
           width="25px"
@@ -101,7 +102,6 @@ import AddModal from './Items/AddModal.vue'
           />
         </svg>
       </RouterLink>
-      <AddModal />
     </div>
   </div>
 </template>

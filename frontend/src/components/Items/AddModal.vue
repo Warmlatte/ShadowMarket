@@ -85,7 +85,7 @@ const submitForm = () => {
         <!-- 重量 -->
         <label class="input input-bordered flex items-center gap-2">
           <span>⚖️</span>
-          <input v-model="itemWeight" type="text" class="grow" placeholder="價格" />
+          <input v-model="itemWeight" type="text" class="grow" placeholder="重量" />
         </label>
         <!-- 稀有度 -->
         <label class="input input-bordered flex items-center gap-2">
