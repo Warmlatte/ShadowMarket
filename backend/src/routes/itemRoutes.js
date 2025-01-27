@@ -1,10 +1,11 @@
 import express from "express";
+import * as ItemController from "../controllers/itemController.js";
 
 const router = express.Router();
 
-// test
-router.get("/", (req, res) => {
-  res.send("接收到訊號了喔 ✅");
-});
+router.get("/", ItemController.fetchAllItems);
+router.post("/", ItemController.addItem);
+router.put("/:id", ItemController.editItem);
+router.delete("/:id", ItemController.removeItem);
 
 export default router;
