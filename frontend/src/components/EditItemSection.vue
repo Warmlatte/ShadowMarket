@@ -1,9 +1,11 @@
 <script setup>
 import EditModal from './Items/EditModal.vue'
 import DeleteConfirmation from './Items/DeleteConfirmation.vue'
+import Alert from './AlertComponent.vue'
 </script>
 
 <template>
+  <Alert />
   <div class="flex justify-center h-auto my-10">
     <!-- 中央區域 -->
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8">
