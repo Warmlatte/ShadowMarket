@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // 建立 axios 實例
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3032/',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 5000,
 })
 

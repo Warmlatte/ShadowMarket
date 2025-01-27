@@ -1,14 +1,12 @@
 <script setup>
 import Navbar from '@/components/NavbarComponent.vue'
-import Notice from '@/components/NoticeSection.vue'
-import Item from '@/components/ItemSection.vue'
+import EditItem from '@/components/EditItemSection.vue'
 import Footer from '@/components/FooterComponent.vue'
 </script>
 
 <template>
   <Navbar />
-  <Notice />
-  <Item />
+  <EditItem />
   <Footer />
 </template>
 
