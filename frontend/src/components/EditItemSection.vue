@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+import EditModal from './Items/EditModal.vue'
+import DeleteConfirmation from './Items/DeleteConfirmation.vue'
+</script>
 
 <template>
   <div class="flex justify-center h-auto my-10">
@@ -14,16 +17,8 @@
           <p class="break-words p-5 text-2xl font-bold text-yellow-500">清醒啤酒杯</p>
         </div>
         <div class="flex flex-row space-x-2">
-          <button
-            class="btn btn-active btn-primary w-[5rem] h-[3rem] text-lg text-gray-800 hover:bg-[#9FD192] transition duration-300"
-          >
-            編輯
-          </button>
-          <button
-            class="btn btn-active btn-secondary w-[5rem] h-[3rem] text-lg text-gray-800 hover:bg-[#F17657] transition duration-300"
-          >
-            刪除
-          </button>
+          <EditModal />
+          <DeleteConfirmation />
         </div>
       </div>
       <!-- card -->
