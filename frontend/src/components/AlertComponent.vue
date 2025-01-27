@@ -20,7 +20,7 @@ const iconPath = computed(() => {
 
 <template>
   <transition name="alert" appear>
-    <div v-if="alertStore.visible" :class="`alert alert-${alertStore.type} w-1/2`">
+    <div v-if="alertStore.visible" :class="`flex alert alert-${alertStore.type} w-auto`">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="stroke-current shrink-0 h-6 w-6"
@@ -51,7 +51,6 @@ const iconPath = computed(() => {
 }
 
 .alert-leave-active {
-  opacity: 0;
   transform: translateX(-50%) translateY(-20px);
 }
 </style>

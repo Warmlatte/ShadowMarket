@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { addSmallTalk } from '@/data/smallTalk'
+import * as AlertController from '@/utils/alertController'
 
 // All Inputs ref
 const itemName = ref('')
@@ -31,6 +32,7 @@ const resetInputValue = () => {
 }
 
 const submitForm = () => {
+  AlertController.showSuccess('新增成功 (๑´ڡ`๑)')
   resetInputValue()
   addModal.value.close()
 }
