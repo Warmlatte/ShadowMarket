@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { addSmallTalk } from '@/data/smallTalk'
 import * as AlertController from '@/utils/alertController'
+import { itemsAPIs } from '@/apis/itemsAPIs'
 
 // All Inputs ref
 const itemName = ref('')
@@ -11,6 +12,19 @@ const itemPrice = ref('')
 const itemWeight = ref('')
 const itemRarity = ref('')
 const itemLink = ref('')
+
+// Form Validation
+const isFormValid = computed(() => {
+  return (
+    itemName.value.trim() &&
+    itemType.value.trim() &&
+    itemEffect.value.trim() &&
+    itemPrice.value.trim() &&
+    itemWeight.value.trim() &&
+    itemRarity.value.trim() &&
+    itemLink.value.trim()
+  )
+})
 
 // Random Small Talk
 const currentSmallTalk = ref('')
@@ -31,10 +45,30 @@ const resetInputValue = () => {
   itemLink.value = ''
 }
 
-const submitForm = () => {
-  AlertController.showSuccess('新增成功 (๑´ڡ`๑)')
-  resetInputValue()
-  addModal.value.close()
+const addItem = async () => {
+  try {
+    const data = {
+      name: itemName.value.trim(),
+      type: itemType.value.trim(),
+      effect: itemEffect.value.trim(),
+      price: Number(itemPrice.value.trim()),
+      weight: Number(itemWeight.value.trim()),
+      rarity: itemRarity.value.trim(),
+      detail_url: itemLink.value.trim(),
+    }
+    await itemsAPIs.createItem(data)
+    AlertController.showSuccess('新增成功 (๑´ڡ`๑)')
+    resetInputValue()
+    addModal.value.close()
+  } catch (error) {
+    console.log(error.response.data.message)
+    if (error.response.data.message === '資料唯一性衝突') {
+      AlertController.showError('這個商品已經有了喔 (。・ω・。)')
+      return
+    }
+    AlertController.showError('新增失敗 (っ°д°;)っ')
+    resetInputValue()
+  }
 }
 </script>
 
@@ -54,7 +88,7 @@ const submitForm = () => {
       ></path>
     </svg>
   </button>
-  <dialog id="add" class="modal" ref="addModal">
+  <dialog ref="addModal" class="modal">
     <div class="modal-box">
       <h3 class="text-3xl font-bold">新增商品ヽ(・×・´)ゞ</h3>
       <p class="opacity-70 text-sm mt-3 italic">
@@ -104,7 +138,9 @@ const submitForm = () => {
         <form method="dialog">
           <div class="space-x-2">
             <button @click="resetInputValue" class="btn">取消 ❌</button>
-            <button @click="submitForm" type="submit" class="btn">送出 🚀</button>
+            <button @click="addItem" :disabled="!isFormValid" type="submit" class="btn">
+              送出 🚀
+            </button>
           </div>
         </form>
       </div>
