@@ -11,6 +11,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+// Static files
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
+
 // Routes
 app.use("/items", ItemsRotes);
 app.use("/auth", AuthRoutes);
