@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { passwordSmallTalk, errorSmallTalk } from '@/data/smallTalk'
 import * as AlertController from '@/utils/alertController'
+import { authAPIs } from '@/apis/authAPIs'
 
 const router = useRouter()
 
@@ -11,25 +12,37 @@ const passwordValue = ref('')
 const currentSmallTalk = ref('')
 
 const openModal = () => {
-  currentSmallTalk.value = passwordSmallTalk[Math.floor(Math.random() * passwordSmallTalk.length)]
-  passwordModal.value.showModal()
+  const token = localStorage.getItem('authToken')
+  if (token) {
+    AlertController.showSuccess('歡迎回來，記得十五分鐘後要重新輸入密碼喔 (´∀｀)♡')
+    router.push('/management')
+  } else {
+    currentSmallTalk.value = passwordSmallTalk[Math.floor(Math.random() * passwordSmallTalk.length)]
+    passwordModal.value.showModal()
+  }
 }
 
-const verifyPassword = () => {
+const verifyPassword = async () => {
   if (passwordValue.value === '') {
     return
   }
 
-  if (passwordValue.value !== '123') {
+  try {
+    const response = await authAPIs.verify(passwordValue.value)
+    if (response.token) {
+      localStorage.setItem('authToken', response.token)
+      AlertController.showSuccess('密碼正確，歡迎回來 (´∀｀)♡')
+      router.push('/management')
+
+      passwordValue.value = ''
+      passwordModal.value.close()
+    }
+  } catch (error) {
+    console.error(error)
     errorSmallTalk.value = errorSmallTalk[Math.floor(Math.random() * errorSmallTalk.length)]
     AlertController.showError(errorSmallTalk.value)
     passwordValue.value = ''
-    return
   }
-  AlertController.showSuccess('密碼正確，歡迎回來 (´∀｀)♡')
-  router.push('/management')
-  passwordValue.value = ''
-  passwordModal.value.close()
 }
 </script>
 

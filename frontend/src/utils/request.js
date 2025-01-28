@@ -9,8 +9,11 @@ const apiClient = axios.create({
 // request 攔截器
 apiClient.interceptors.request.use(
   (config) => {
-    // headers or token (JWT)
-    // loading...
+    const token = localStorage.getItem('authToken')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+      console.log(token)
+    }
     return config
   },
   (error) => Promise.reject(error),
