@@ -12,20 +12,30 @@ const passwordValue = ref('')
 const currentSmallTalk = ref('')
 
 const openModal = () => {
+  currentSmallTalk.value = passwordSmallTalk[Math.floor(Math.random() * passwordSmallTalk.length)]
+  passwordModal.value.showModal()
+}
+
+const checkAndNavigate = async () => {
   const token = localStorage.getItem('authToken')
+
   if (token) {
-    AlertController.showSuccess('歡迎回來，記得十五分鐘後要重新輸入密碼喔 (´∀｀)♡')
-    router.push('/management')
+    try {
+      await authAPIs.verifyToken(token)
+      AlertController.showSuccess('歡迎回來，記得十五分鐘後要重新輸入密碼喔 (´∀｀)♡')
+      router.push('/management')
+    } catch {
+      localStorage.removeItem('authToken')
+      AlertController.showError('授權已過期，請重新輸入 (。・ω・。)')
+      openModal()
+    }
   } else {
-    currentSmallTalk.value = passwordSmallTalk[Math.floor(Math.random() * passwordSmallTalk.length)]
-    passwordModal.value.showModal()
+    openModal()
   }
 }
 
 const verifyPassword = async () => {
-  if (passwordValue.value === '') {
-    return
-  }
+  if (passwordValue.value === '') return
 
   try {
     const response = await authAPIs.verify(passwordValue.value)
@@ -46,7 +56,7 @@ const verifyPassword = async () => {
 </script>
 
 <template>
-  <button @click="openModal" class="btn btn-ghost btn-circle">
+  <button @click="checkAndNavigate" class="btn btn-ghost btn-circle">
     <svg
       width="25px"
       height="25px"

@@ -70,6 +70,10 @@ const addItem = async () => {
       AlertController.showError('這個商品已經有了喔 (。・ω・。)')
       return
     }
+    if (error.response.data.status === 401 || error.response.data.status === 403) {
+      AlertController.showError('授權已過期，請重新輸入 (。・ω・。)')
+      return
+    }
     AlertController.showError('新增失敗 (っ°д°;)っ')
     resetInputValue()
   }
