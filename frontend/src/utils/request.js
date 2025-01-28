@@ -12,7 +12,7 @@ apiClient.interceptors.request.use(
     const token = localStorage.getItem('authToken')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
-      console.log(token)
+      // console.log(token)
     }
     return config
   },
@@ -23,7 +23,6 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    console.error('API 回應錯誤', error)
     return Promise.reject(error)
   },
 )

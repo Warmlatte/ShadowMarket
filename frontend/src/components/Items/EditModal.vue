@@ -75,8 +75,7 @@ const editItems = async () => {
     AlertController.showSuccess('編輯成功 (๑•̀ω•́๑)')
     resetInputValue()
     editModal.value.close()
-  } catch (error) {
-    console.error(error)
+  } catch {
     AlertController.showError('編輯失敗 (っ°д°;)っ')
   }
 }

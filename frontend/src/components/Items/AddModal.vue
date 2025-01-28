@@ -66,7 +66,6 @@ const addItem = async () => {
     resetInputValue()
     addModal.value.close()
   } catch (error) {
-    console.log(error.response.data.message)
     if (error.response.data.message === '資料唯一性衝突') {
       AlertController.showError('這個商品已經有了喔 (。・ω・。)')
       return

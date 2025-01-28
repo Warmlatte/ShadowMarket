@@ -19,8 +19,7 @@ export const useItemStore = defineStore('item', () => {
         return
       }
       items.value = data
-    } catch (error) {
-      console.error('資料取得失敗:', error)
+    } catch {
       AlertController.showError('資料溜走啦 (っ°д°;)っ')
     }
   }
@@ -44,8 +43,7 @@ export const useItemStore = defineStore('item', () => {
       }
       AlertController.showSuccess('搜尋成功 (๑•̀ω•́๑)')
       searchItems.value = data
-    } catch (error) {
-      console.error('資料取得失敗:', error)
+    } catch {
       AlertController.showError('搜尋失敗，請稍後再試 (っ°д°;)っ')
       searchItems.value = []
     }
