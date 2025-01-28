@@ -74,7 +74,6 @@ export const removeItem = async (req, res, next) => {
 export const lookupItem = async (req, res, next) => {
   try {
     const { keyword, type, rarity } = req.query;
-    console.log("Received query:", { keyword, type, rarity }); // 新增這行
 
     const response = await itemService.searchItems({ keyword, type, rarity });
 

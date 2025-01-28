@@ -16,9 +16,14 @@ const openModal = () => {
 }
 
 const verifyPassword = () => {
+  if (passwordValue.value === '') {
+    return
+  }
+
   if (passwordValue.value !== '123') {
     errorSmallTalk.value = errorSmallTalk[Math.floor(Math.random() * errorSmallTalk.length)]
     AlertController.showError(errorSmallTalk.value)
+    passwordValue.value = ''
     return
   }
   AlertController.showSuccess('密碼正確，歡迎回來 (´∀｀)♡')
@@ -57,6 +62,7 @@ const verifyPassword = () => {
       <div class="mt-8 mb-5 flex justify-between items-center">
         <input
           v-model="passwordValue"
+          @keyup.enter="verifyPassword"
           type="text"
           placeholder="請輸入密語..."
           class="input input-bordered input-accent w-full max-w-xs"
