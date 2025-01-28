@@ -1,38 +1,18 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { itemsAPIs } from '@/apis/itemsAPIs'
-import * as AlertController from '@/utils/alertController'
+import { onMounted } from 'vue'
 import EditModal from './Items/EditModal.vue'
 import DeleteConfirmation from './Items/DeleteConfirmation.vue'
 import Alert from './AlertComponent.vue'
+import { useItemStore } from '@/store/ItemStore'
 
-const ItemInfo = ref([])
-
-const getAllItems = async () => {
-  try {
-    const { data } = await itemsAPIs.fetchAllItems()
-    console.log(data)
-    if (!data || data.length === 0) {
-      ItemInfo.value = []
-      return
-    }
-
-    ItemInfo.value = data
-  } catch {
-    AlertController.showError('資料溜走啦 (っ°д°;)っ')
-  }
-}
+const itemStore = useItemStore()
 
 onMounted(() => {
-  getAllItems()
+  itemStore.getAllItems()
 })
 
-// 即時更新編輯後的資料
 const updateItemInList = (updatedItem) => {
-  const index = ItemInfo.value.findIndex((item) => item.id === updatedItem.id)
-  if (index !== -1) {
-    ItemInfo.value[index] = { ...ItemInfo.value[index], ...updatedItem }
-  }
+  itemStore.updateItem(updatedItem)
 }
 </script>
 
@@ -40,7 +20,7 @@ const updateItemInList = (updatedItem) => {
   <Alert />
   <div class="flex justify-center h-auto my-10">
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8">
-      <div v-for="(item, index) in ItemInfo" :key="index">
+      <div v-for="(item, index) in itemStore.items" :key="index">
         <div
           class="flex flex-col justify-center items-center space-y-2 w-48 h-[12rem] bg-gray-700 rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-2 transition duration-300"
         >

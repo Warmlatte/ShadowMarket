@@ -3,6 +3,9 @@ import { ref, computed } from 'vue'
 import { addSmallTalk } from '@/data/smallTalk'
 import * as AlertController from '@/utils/alertController'
 import { itemsAPIs } from '@/apis/itemsAPIs'
+import { useItemStore } from '@/store/ItemStore'
+
+const itemStore = useItemStore()
 
 // All Inputs ref
 const itemName = ref('')
@@ -56,7 +59,9 @@ const addItem = async () => {
       rarity: itemRarity.value.trim(),
       detail_url: itemLink.value.trim(),
     }
-    await itemsAPIs.createItem(data)
+    const response = await itemsAPIs.createItem(data)
+    itemStore.addItem(response.data)
+
     AlertController.showSuccess('新增成功 (๑´ڡ`๑)')
     resetInputValue()
     addModal.value.close()

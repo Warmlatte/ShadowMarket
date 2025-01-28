@@ -1,6 +1,6 @@
 <script setup>
 import AddModal from './Items/AddModal.vue'
-import passwordModal from './passwordModal.vue'
+import passwordModal from './PasswordModal.vue'
 </script>
 
 <template>

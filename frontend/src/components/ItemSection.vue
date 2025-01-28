@@ -1,41 +1,25 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { itemsAPIs } from '@/apis/itemsAPIs'
-import * as AlertController from '@/utils/alertController'
+import { useItemStore } from '@/store/ItemStore'
 
-const ItemInfo = ref([])
-
-const getAllItems = async () => {
-  try {
-    const { data } = await itemsAPIs.fetchAllItems()
-    console.log(data)
-    if (!data || data.length === 0) {
-      ItemInfo.value = []
-      return
-    }
-
-    ItemInfo.value = data
-  } catch {
-    AlertController.showError('資料溜走啦 (っ°д°;)っ')
-  }
-}
-
-onMounted(() => {
-  getAllItems()
-})
+const itemStore = useItemStore()
 
 const itemModals = ref([])
 
 const openModal = (index) => {
   itemModals.value[index].showModal()
 }
+
+onMounted(() => {
+  itemStore.getAllItems()
+})
 </script>
 
 <template>
   <div class="w-full flex justify-between h-[55vh]">
     <!-- Item  -->
     <div class="w-full lg:w-1/2 space-y-6 mb-10 overflow-y-auto h-full pr-4">
-      <div v-for="(item, index) in ItemInfo" :key="index">
+      <div v-for="(item, index) in itemStore.items" :key="item.id">
         <button
           @click="openModal(index)"
           class="btn btn-ghost w-full h-auto bg-transparent hover:bg-transparent hover:shadow-none p-0"
