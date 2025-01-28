@@ -29,7 +29,11 @@ const deleteItem = async () => {
     itemStore.items = itemStore.items.filter((item) => item.id !== props.item)
     AlertController.showSuccess('刪除成功 (๑•̀ω•́๑)')
     deleteModal.value.close()
-  } catch {
+  } catch (error) {
+    if (error.response.data.status === 401 || error.response.data.status === 403) {
+      AlertController.showError('授權已過期，請重新輸入 (。・ω・。)')
+      return
+    }
     AlertController.showError('刪除失敗 (っ°д°;)っ')
   }
 }

@@ -28,3 +28,30 @@ export const verifyPassword = async (req, res) => {
     });
   }
 };
+
+export const verifyToken = async (req, res) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({
+      status: 401,
+      message: "未提供授權 token",
+    });
+  }
+  try {
+    await authService.verifyToken(token);
+
+    res.status(200).json({
+      status: 200,
+      message: "token 驗證成功",
+      data: [],
+    });
+  } catch (error) {
+    res.status(403).json({
+      status: 403,
+      message: "無效或過期的 token",
+      data: [],
+    });
+  }
+};
