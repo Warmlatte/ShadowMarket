@@ -9,8 +9,8 @@ export const itemsAPIs = {
     return await apiClient.post('/items/', data)
   },
 
-  updataItem: async (data) => {
-    return await apiClient.put(`/items/${data.id}/`, data)
+  updateItem: async (id, data) => {
+    return await apiClient.put(`/items/${id}/`, data)
   },
 
   deleteItem: async (id) => {
