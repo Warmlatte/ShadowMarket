@@ -1,6 +1,6 @@
 import { authService } from "../services/authService.js";
 import jwt from "jsonwebtoken";
-export const verifyPassword = async (req, res, next) => {
+export const verifyPassword = async (req, res) => {
   try {
     const { password } = req.body;
 
