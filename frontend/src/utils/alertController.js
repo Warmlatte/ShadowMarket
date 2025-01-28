@@ -1,4 +1,4 @@
-import { useAlertStore } from '@/store/alertStore'
+import { useAlertStore } from '@/store/AlertStore'
 
 const showSuccess = (message) => {
   const alertStore = useAlertStore()
