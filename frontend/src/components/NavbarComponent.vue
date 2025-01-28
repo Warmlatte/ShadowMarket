@@ -1,6 +1,9 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import AddModal from './Items/AddModal.vue'
 import passwordModal from './PasswordModal.vue'
+
+const route = useRoute()
 </script>
 
 <template>
@@ -82,7 +85,7 @@ import passwordModal from './PasswordModal.vue'
           </svg>
         </button>
       </div>
-      <AddModal />
+      <AddModal v-if="route.path === '/management'" />
       <passwordModal />
     </div>
   </div>
