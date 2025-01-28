@@ -32,4 +32,10 @@ export const errorMiddleware = (err, req, res, next) => {
       data: err.message,
     });
   }
+
+  res.status(500).json({
+    status: 500,
+    message: "伺服器內部錯誤",
+    data: err.message,
+  });
 };

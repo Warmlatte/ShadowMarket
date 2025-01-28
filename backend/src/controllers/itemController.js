@@ -70,3 +70,28 @@ export const removeItem = async (req, res, next) => {
     next(error);
   }
 };
+
+export const lookupItem = async (req, res, next) => {
+  try {
+    const { keyword, type, rarity } = req.query;
+    console.log("Received query:", { keyword, type, rarity }); // 新增這行
+
+    const response = await itemService.searchItems({ keyword, type, rarity });
+
+    if (!response || response.length === 0) {
+      return res.status(200).json({
+        status: 200,
+        message: "查無資料",
+        data: [],
+      });
+    }
+
+    res.status(200).json({
+      status: 200,
+      message: "資料查詢成功",
+      data: response,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

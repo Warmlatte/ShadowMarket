@@ -30,4 +30,20 @@ export const itemService = {
       },
     });
   },
+
+  async searchItems({ keyword, type, rarity }) {
+    const where = {
+      OR: [{ name: { contains: keyword } }, { effect: { contains: keyword } }],
+      AND: [],
+    };
+
+    if (type && type.trim()) {
+      where.AND.push({ type: { contains: type } });
+    }
+    if (rarity && rarity.trim()) {
+      where.AND.push({ rarity: { contains: rarity } });
+    }
+
+    return await prisma.item.findMany({ where });
+  },
 };
