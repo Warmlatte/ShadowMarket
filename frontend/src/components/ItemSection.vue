@@ -13,6 +13,16 @@ const displayedItems = computed(() =>
   itemStore.searchItems.length > 0 ? itemStore.searchItems : itemStore.items,
 )
 
+const keyword = ref('')
+const handleSearch = () => {
+  if (keyword.value === '') {
+    return
+  }
+
+  itemStore.lookupItem(keyword.value)
+  keyword.value = ''
+}
+
 onMounted(() => {
   itemStore.getAllItems()
 })
@@ -21,7 +31,30 @@ onMounted(() => {
 <template>
   <div class="w-full flex justify-between h-[55vh]">
     <!-- Item  -->
-    <div class="w-full lg:w-1/2 space-y-6 mb-10 overflow-y-auto h-full pr-4">
+    <div class="w-full lg:w-1/2 space-y-6 mb-10 overflow-y-auto h-full p-3 lg:pr-4">
+      <label class="md:hidden flex input input-bordered items-center mx-2">
+        <input
+          v-model="keyword"
+          @keyup.enter="handleSearch"
+          type="text"
+          class="grow"
+          placeholder="Search"
+        />
+        <button class="btn btn-ghost items-center" @click="handleSearch">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            class="h-4 w-4 opacity-70"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </label>
       <div
         v-if="displayedItems.length > 0"
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:ml-24"

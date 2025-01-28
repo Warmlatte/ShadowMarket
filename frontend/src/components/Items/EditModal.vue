@@ -84,7 +84,7 @@ const editItems = async () => {
 <template>
   <button
     @click="openModal"
-    class="btn btn-active btn-primary w-[5rem] h-[3rem] text-lg text-gray-800 hover:bg-[#9FD192] transition duration-300"
+    class="btn btn-active btn-primary w-[4rem] h-[1.5rem] text-[0.9rem] p-0 md:w-[5rem] md:h-[3rem] md:text-lg text-gray-800 hover:bg-[#9FD192] transition duration-300"
   >
     編輯
   </button>

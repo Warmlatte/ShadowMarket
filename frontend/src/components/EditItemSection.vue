@@ -29,7 +29,7 @@ const displayedItems = computed(() =>
 </script>
 
 <template>
-  <div class="w-1/4 ml-24 mt-10">
+  <div class="md:w-2/5 md:ml-24 lg:w-1/4 lg:ml-24 mt-10 mx-5">
     <label class="input input-bordered flex items-center">
       <input
         v-model="keyword"
@@ -54,15 +54,17 @@ const displayedItems = computed(() =>
     </label>
   </div>
   <div class="flex justify-center h-auto my-10">
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8">
       <div v-for="(item, index) in displayedItems" :key="index">
         <div
-          class="flex flex-col justify-center items-center space-y-2 w-48 h-[12rem] bg-gray-700 rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-2 transition duration-300"
+          class="flex flex-col justify-center items-center space-y-2 w-[10rem] h-[10rem] md:w-48 md:h-[12rem] bg-gray-700 rounded-xl shadow-xl md:hover:shadow-2xl md:hover:-translate-y-2 transition duration-300"
         >
           <div
-            class="flex justify-center items-center text-center w-[10.5rem] h-[7rem] bg-base-200 rounded-xl overflow-hidden"
+            class="flex justify-center items-center text-center w-[9rem] h-[5rem] md:w-[10.5rem] md:h-[7rem] bg-base-200 rounded-xl overflow-hidden"
           >
-            <p class="break-words p-5 text-2xl font-bold text-yellow-500">{{ item.name }}</p>
+            <p class="break-words text-lg p-3 md:p-5 md:text-xl font-bold text-yellow-500">
+              {{ item.name }}
+            </p>
           </div>
           <div class="flex flex-row space-x-2">
             <EditModal :item="item" @update-item="updateItemInList" />
