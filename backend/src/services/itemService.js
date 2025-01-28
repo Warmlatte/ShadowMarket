@@ -3,11 +3,7 @@ import { CreateItemSchema } from "../validations/itemSchema.js";
 
 export const itemService = {
   async getAllItems() {
-    return await prisma.item.findMany({
-      orderBy: {
-        created_at: "desc",
-      },
-    });
+    return await prisma.item.findMany({});
   },
 
   async createItem(data) {

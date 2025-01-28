@@ -40,15 +40,6 @@ const editModal = ref(null)
 
 const openModal = () => {
   currentSmallTalk.value = editSmallTalk[Math.floor(Math.random() * editSmallTalk.length)]
-  if (props.item) {
-    itemName.value = props.item.name || ''
-    itemType.value = props.item.type || ''
-    itemEffect.value = props.item.effect || ''
-    itemPrice.value = props.item.price || ''
-    itemWeight.value = props.item.weight || ''
-    itemRarity.value = props.item.rarity || ''
-    itemLink.value = props.item.detail_url || ''
-  }
   editModal.value.showModal()
 }
 
