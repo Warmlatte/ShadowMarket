@@ -51,8 +51,8 @@ const addItem = async () => {
       name: itemName.value.trim(),
       type: itemType.value.trim(),
       effect: itemEffect.value.trim(),
-      price: Number(itemPrice.value.trim()),
-      weight: Number(itemWeight.value.trim()),
+      price: Number(itemPrice.value),
+      weight: Number(itemWeight.value),
       rarity: itemRarity.value.trim(),
       detail_url: itemLink.value.trim(),
     }
