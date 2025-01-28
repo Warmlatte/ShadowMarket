@@ -15,8 +15,22 @@ const router = createRouter({
       path: '/management',
       name: 'management',
       component: EditItemView,
+      meta: { requiresAuth: true },
     },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const token = localStorage.getItem('authToken')
+    if (token) {
+      next()
+    } else {
+      next('/')
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
