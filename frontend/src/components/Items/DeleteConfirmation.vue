@@ -2,6 +2,17 @@
 import { ref } from 'vue'
 import { deleteSmallTalk } from '@/data/smallTalk'
 import * as AlertController from '@/utils/alertController'
+import { itemsAPIs } from '@/apis/itemsAPIs'
+import { useItemStore } from '@/store/ItemStore'
+
+const itemStore = useItemStore()
+
+const props = defineProps({
+  item: {
+    type: Number,
+    required: true,
+  },
+})
 
 // Random Small Talk
 const currentSmallTalk = ref('')
@@ -12,9 +23,16 @@ const openModal = () => {
   deleteModal.value.showModal()
 }
 
-const submitForm = () => {
-  AlertController.showSuccess('刪除成功 (๑•̀ω•́๑)')
-  deleteModal.value.close()
+const deleteItem = async () => {
+  try {
+    await itemsAPIs.deleteItem(props.item)
+    itemStore.items = itemStore.items.filter((item) => item.id !== props.item)
+    AlertController.showSuccess('刪除成功 (๑•̀ω•́๑)')
+    deleteModal.value.close()
+  } catch (error) {
+    AlertController.showError('刪除失敗 (っ°д°;)っ')
+    console.error(error)
+  }
 }
 </script>
 
@@ -35,8 +53,8 @@ const submitForm = () => {
       <div class="modal-action">
         <form method="dialog">
           <div class="space-x-2">
-            <button @click="resetInputValue" class="btn">取消 ❌</button>
-            <button @click="submitForm" type="submit" class="btn">我就刪 😈</button>
+            <button class="btn">取消 ❌</button>
+            <button @click="deleteItem" type="submit" class="btn">我就刪 😈</button>
           </div>
         </form>
       </div>
