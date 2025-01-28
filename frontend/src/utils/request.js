@@ -25,16 +25,4 @@ apiClient.interceptors.response.use(
   },
 )
 
-// 測試請求
-const testConnection = async () => {
-  try {
-    const response = await apiClient.get('/items/')
-    console.log('success', response)
-  } catch (error) {
-    console.error('error', error)
-  }
-}
-
-testConnection()
-
 export { apiClient }
