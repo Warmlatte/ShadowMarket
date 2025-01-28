@@ -10,9 +10,4 @@ const showError = (message) => {
   alertStore.showAlert('error', message)
 }
 
-const manualShowError = (message) => {
-  const alertStore = useAlertStore()
-  alertStore.showAlert('error', message)
-}
-
-export { showSuccess, showError, manualShowError }
+export { showSuccess, showError }
