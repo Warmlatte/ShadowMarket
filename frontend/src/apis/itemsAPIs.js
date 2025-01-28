@@ -16,4 +16,8 @@ export const itemsAPIs = {
   deleteItem: async (id) => {
     return await apiClient.delete(`/items/${id}/`)
   },
+
+  searchItem: async (keyword, type, rarity) => {
+    return await apiClient.get(`/items/search/?keyword=${keyword}&type=${type}&rarity=${rarity}`)
+  },
 }

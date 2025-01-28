@@ -136,7 +136,7 @@ const editItems = async () => {
       <div class="modal-action">
         <form method="dialog">
           <div class="space-x-2">
-            <button @click="resetInputValue" class="btn">取消 ❌</button>
+            <button class="btn">取消 ❌</button>
             <button @click="editItems" type="submit" class="btn">送出 🚀</button>
           </div>
         </form>
