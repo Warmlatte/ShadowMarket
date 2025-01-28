@@ -37,8 +37,7 @@ const verifyPassword = async () => {
       passwordValue.value = ''
       passwordModal.value.close()
     }
-  } catch (error) {
-    console.error(error)
+  } catch {
     errorSmallTalk.value = errorSmallTalk[Math.floor(Math.random() * errorSmallTalk.length)]
     AlertController.showError(errorSmallTalk.value)
     passwordValue.value = ''

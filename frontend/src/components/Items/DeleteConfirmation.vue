@@ -29,9 +29,8 @@ const deleteItem = async () => {
     itemStore.items = itemStore.items.filter((item) => item.id !== props.item)
     AlertController.showSuccess('刪除成功 (๑•̀ω•́๑)')
     deleteModal.value.close()
-  } catch (error) {
+  } catch {
     AlertController.showError('刪除失敗 (っ°д°;)っ')
-    console.error(error)
   }
 }
 </script>
