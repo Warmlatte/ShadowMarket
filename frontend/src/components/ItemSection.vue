@@ -91,7 +91,7 @@ onMounted(() => {
                   <p class="mt-2 mb-5 text-lg text-yellow-400">{{ item.price }} gp</p>
 
                   <a
-                    class="text-xl text-gray-400 hover:text-gray-300"
+                    class="text-xl text-gray-400 lg:hover:text-gray-300"
                     :href="item.detail_url"
                     target="_blank"
                     ><strong>更多資訊</strong></a

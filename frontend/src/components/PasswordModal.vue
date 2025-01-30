@@ -89,7 +89,9 @@ const verifyPassword = async () => {
           placeholder="請輸入密語..."
           class="input input-bordered input-accent w-full max-w-xs"
         />
-        <button @click="verifyPassword" class="btn btn-outline btn-accent">確認...?</button>
+        <button @click="verifyPassword" class="hidden md:block btn btn-outline btn-accent">
+          確認...?
+        </button>
       </div>
     </div>
     <form method="dialog" class="modal-backdrop">
