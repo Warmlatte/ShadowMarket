@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import { errorMiddleware } from "./src/middlewares/errorMiddleware.js";
 import ItemsRotes from "./src/routes/itemRoutes.js";
 import AuthRoutes from "./src/routes/authRoutes.js";
+import aiRoutes from "./src/routes/aiRoutes.js";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors());
 // Routes
 app.use("/items", ItemsRotes);
 app.use("/auth", AuthRoutes);
+app.use("/ask", aiRoutes);
 
 // Error Handler
 app.use(errorMiddleware);

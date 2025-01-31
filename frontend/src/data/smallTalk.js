@@ -79,4 +79,29 @@ const errorSmallTalk = [
   '影子迅速蔓延，像是想抓住你：‘錯誤的答案，夜之守護者正注視著你……要不要再試一次？ (ಠ‿↼)',
 ]
 
-export { addSmallTalk, editSmallTalk, deleteSmallTalk, passwordSmallTalk, errorSmallTalk }
+const askSmallTalk = [
+  '唔…這問題有點意思！(ΦωΦ)',
+  '等我一下，讓我掐指一算！(¬‿¬)',
+  '施法中……噗，差點炸了！(ﾉ>ω<)ﾉ',
+  '唔嗯……快了快了！(๑•̀ㅂ•́)و✧',
+  '欸？這問題不在我的魔法課本裡！(⊙ω⊙)',
+  '思考中……請稍等！(ΦзΦ)',
+  '咦？我是不是在哪聽過這問題？(⊙_⊙;)',
+  '翻翻魔導書……啊，剛剛掉地上了！(；д；)',
+  '稍等，我在腦內翻找記憶碎片！(•ω•)',
+  '哎呀，魔力有點卡住了！(´-ω-｀)',
+  '快了快了，再給我三秒！(ﾉ>ω<)ﾉ',
+  '這問題太深奧，我在努力消化！(¬‿¬)',
+  '我在召喚答案……結果只召喚了一隻貓！(ΦωΦ)',
+  '等一下，我的腦袋還在啟動中！(￣▽￣)',
+  '嘟嘟嚕～加速思考模式啟動！(☆▽☆)',
+]
+
+export {
+  addSmallTalk,
+  editSmallTalk,
+  deleteSmallTalk,
+  passwordSmallTalk,
+  errorSmallTalk,
+  askSmallTalk,
+}
