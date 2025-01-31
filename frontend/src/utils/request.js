@@ -3,7 +3,7 @@ import axios from 'axios'
 // 建立 axios 實例
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
-  timeout: 5000,
+  timeout: 30000,
 })
 
 // request 攔截器
