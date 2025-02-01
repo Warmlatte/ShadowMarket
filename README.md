@@ -19,6 +19,7 @@ Shadow Market 是一個 **神秘的黑市風格魔法道具商城**，專為 **D
 
 ✅ **商品展示** —— 探索神秘的魔法道具 🛒🔮  
 ✅ **關鍵字搜尋** —— 迅速找到你的夢幻裝備 🔍✨  
+✅ **AI 小精靈助理** —— 與 魔法商店店員 互動 🤖💬
 ✅ **後台管理** —— 新增、編輯、刪除商品 🏗🔧  
 ✅ **安全機制** —— 使用 Token 保護編輯權限 🔑🔐  
 ✅ **未來計畫** —— 更多篩選與排序功能 🛠️📜  
@@ -30,7 +31,7 @@ Shadow Market 是一個 **神秘的黑市風格魔法道具商城**，專為 **D
 ### 1️⃣ 安裝專案  
 
 ```sh
-git clone https://github.com/你的GitHub/shadow-market.git  
+git clone https://github.com/Warmlatte/shadow-market.git  
 cd ShadowMarket  
 ```
 
@@ -46,11 +47,20 @@ npm install
 ```
 
 ### 3️⃣ 環境變數設定
-請在 `backend/.env` 中設定你的 MySQL 資料庫 及 JWT_SECRET。
+請在 `backend/.env` 中設定你的 MySQL 資料庫 及 JWT_SECRET。<br />
+如果需要 AI 聊天機器人功能還要另外設定 OPENAI_API_KEY。
 
 ```env
 DATABASE_URL="mysql://user:password@host:port/database"
 JWT_SECRET="your_secret_key"
+JWT_EXPIRATION=15m // 可更改
+OPENAI_API_KEY="your_openai_api_key"
+```
+<br />
+
+請在 `frontend/.env` 中設定你的 API_BASE_URL。
+```env
+VITE_API_BASE_URL="後端伺服器網址"
 ```
 
 ### 4️⃣ 啟動開發環境
