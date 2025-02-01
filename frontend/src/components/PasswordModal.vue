@@ -85,7 +85,7 @@ const verifyPassword = async () => {
         <input
           v-model="passwordValue"
           @keyup.enter="verifyPassword"
-          type="text"
+          type="password"
           placeholder="請輸入密語..."
           class="input input-bordered input-accent w-full max-w-xs"
         />
