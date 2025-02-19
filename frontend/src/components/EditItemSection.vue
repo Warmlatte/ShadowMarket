@@ -6,9 +6,22 @@ import { useItemStore } from '@/store/ItemStore'
 
 const itemStore = useItemStore()
 
-onMounted(() => {
-  itemStore.getAllItems()
-})
+const totalPages = computed(() => itemStore.totalPages || 1)
+const storeCurrentPage = computed(() => itemStore.currentPage || 1)
+const itemsPerPage = 10
+const searchBar = ref(null)
+
+const fetchItems = async (page) => {
+  await itemStore.getAllItems(page, itemsPerPage)
+
+  if (window.innerWidth <= 768) {
+    const searchBarPosition = searchBar.value.getBoundingClientRect().top + window.scrollY
+    window.scrollTo({
+      top: searchBarPosition - 150, // 偏移量
+      behavior: 'smooth',
+    })
+  }
+}
 
 const updateItemInList = (updatedItem) => {
   itemStore.updateItem(updatedItem)
@@ -26,11 +39,15 @@ const handleSearch = () => {
 const displayedItems = computed(() =>
   itemStore.searchItems.length > 0 ? itemStore.searchItems : itemStore.items,
 )
+
+onMounted(() => {
+  fetchItems(1)
+})
 </script>
 
 <template>
   <div class="md:w-2/5 md:ml-24 lg:w-1/4 lg:ml-24 mt-10 mx-5">
-    <label class="input input-bordered flex items-center">
+    <label ref="searchBar" class="input input-bordered flex items-center">
       <input
         v-model="keyword"
         @keyup.enter="handleSearch"
@@ -72,6 +89,22 @@ const displayedItems = computed(() =>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center">
+    <div class="join">
+      <input
+        v-for="page in totalPages"
+        :key="page"
+        class="join-item btn btn-square"
+        type="radio"
+        name="pagination"
+        :aria-label="`${page}`"
+        :value="page"
+        :checked="page === storeCurrentPage"
+        @change="(e) => fetchItems(parseInt(e.target.value))"
+      />
     </div>
   </div>
 </template>

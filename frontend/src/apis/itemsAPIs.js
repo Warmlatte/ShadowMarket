@@ -1,8 +1,8 @@
 import { apiClient } from '@/utils/request'
 
 export const itemsAPIs = {
-  fetchAllItems: async () => {
-    return await apiClient.get('/items/')
+  fetchAllItems: async (page = 1, limit = 9) => {
+    return await apiClient.get(`/items?page=${page}&limit=${limit}`)
   },
 
   createItem: async (data) => {
