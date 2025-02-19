@@ -42,8 +42,7 @@ const sendMessage = async () => {
       sender: '🦉',
       text: response.answer || '哎呀，我好像被魔法干擾了，回答不出來呢！(╯︵╰,)',
     })
-  } catch (error) {
-    console.error('API 錯誤:', error)
+  } catch {
     messages.value.push({
       sender: '🦉',
       text: '呃啊……我感覺魔力波動出了點問題！再試一次好嗎？(╥﹏╥)',
