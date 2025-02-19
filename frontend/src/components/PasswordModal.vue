@@ -81,18 +81,17 @@ const verifyPassword = async () => {
       <p class="opacity-70 text-md mt-3 italic">
         {{ currentSmallTalk }}
       </p>
-      <div class="mt-8 mb-5 flex justify-between items-center">
+      <form @submit.prevent="verifyPassword" class="mt-8 mb-5 flex justify-between items-center">
+        <input type="text" name="username" autocomplete="username" class="hidden" />
         <input
           v-model="passwordValue"
-          @keyup.enter="verifyPassword"
           type="password"
           placeholder="請輸入密語..."
+          autocomplete="new-password"
           class="input input-bordered input-accent w-full max-w-xs"
         />
-        <button @click="verifyPassword" class="hidden md:block btn btn-outline btn-accent">
-          確認...?
-        </button>
-      </div>
+        <button type="submit" class="hidden md:block btn btn-outline btn-accent">確認...?</button>
+      </form>
     </div>
     <form method="dialog" class="modal-backdrop">
       <button>close</button>
