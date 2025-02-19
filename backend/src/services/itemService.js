@@ -2,8 +2,21 @@ import { prisma } from "../config/prisma.js";
 import { CreateItemSchema } from "../validations/itemSchema.js";
 
 export const itemService = {
-  async getAllItems() {
-    return await prisma.item.findMany({});
+  async getAllItems({ page = 1, limit = 9 }) {
+    const skip = (page - 1) * limit;
+
+    const items = await prisma.item.findMany({
+      skip,
+      take: limit,
+    });
+
+    const totalItems = await prisma.item.count();
+    return {
+      items,
+      totalItems,
+      totalPages: Math.ceil(totalItems / limit),
+      currentPage: page,
+    };
   },
 
   async createItem(data) {

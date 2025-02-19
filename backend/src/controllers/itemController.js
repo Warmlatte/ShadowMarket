@@ -1,8 +1,11 @@
 import { itemService } from "../services/itemService.js";
 
-export const fetchAllItems = async (_req, res, next) => {
+export const fetchAllItems = async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 9;
+
   try {
-    const response = await itemService.getAllItems();
+    const response = await itemService.getAllItems({ page, limit });
 
     if (!response || response.length === 0) {
       return res.status(200).json({
