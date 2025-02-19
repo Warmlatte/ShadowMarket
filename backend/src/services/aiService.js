@@ -52,7 +52,6 @@ export const getAIResponse = async (question) => {
 
     return response.data.choices[0].message.content;
   } catch (error) {
-    console.error("❌ OpenAI API 錯誤:", error.response?.data || error.message);
     throw new Error("AI response error");
   }
 };
