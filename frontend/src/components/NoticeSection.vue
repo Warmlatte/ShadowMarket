@@ -3,7 +3,7 @@
 <template>
   <div class="m-10">
     <div class="mockup-window bg-neutral border">
-      <div class="bg-base-200 flex flex-col items-center px-6 pt-6 pb-8 space-y-4">
+      <div class="bg-base-200 flex flex-col items-center px-6 pt-6 pb-14 space-y-4">
         <!-- small -->
         <div class="md:hidden lg:hidden">
           <h2 class="text-xl font-bold">🛒 選購須知</h2>
