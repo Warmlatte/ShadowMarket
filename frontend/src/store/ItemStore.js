@@ -7,21 +7,34 @@ export const useItemStore = defineStore('item', () => {
   const items = ref([])
   const searchItems = ref([])
 
-  const addItem = async (item) => {
-    items.value.push(item)
-  }
+  const currentPage = ref(1)
+  const totalPages = ref(1)
+  const isLoading = ref(false)
 
-  const getAllItems = async () => {
+  const getAllItems = async (page = 1, limit = 9) => {
+    if (isLoading.value) return
+    isLoading.value = true
+
     try {
-      const { data } = await itemsAPIs.fetchAllItems()
-      if (!data || data.length === 0) {
+      const response = await itemsAPIs.fetchAllItems(page, limit)
+      if (!response.data || response.data.length === 0) {
         items.value = []
+        totalPages.value = 1
         return
       }
-      items.value = data
+
+      items.value = response.data.items
+      totalPages.value = response.data.totalPages || 1
+      currentPage.value = response.data.currentPage || page
     } catch {
       AlertController.showError('資料溜走啦 (っ°д°;)っ')
     }
+
+    isLoading.value = false
+  }
+
+  const addItem = async (item) => {
+    items.value.push(item)
   }
 
   // 更新商品資料
@@ -54,5 +67,16 @@ export const useItemStore = defineStore('item', () => {
     AlertController.showSuccess('清除搜尋結果成功 (๑•̀ω•́๑)')
   }
 
-  return { items, searchItems, getAllItems, addItem, updateItem, lookupItem, resetSearchItems }
+  return {
+    items,
+    searchItems,
+    currentPage,
+    totalPages,
+    isLoading,
+    getAllItems,
+    addItem,
+    updateItem,
+    lookupItem,
+    resetSearchItems,
+  }
 })
