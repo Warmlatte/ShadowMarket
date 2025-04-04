@@ -1,46 +1,54 @@
-import { prisma } from "../config/prisma.js";
+import { prisma, db, withRetry } from "../config/improved-prisma.js";
 import { CreateItemSchema } from "../validations/itemSchema.js";
 
 export const itemService = {
   async getAllItems({ page = 1, limit = 9 }) {
     const skip = (page - 1) * limit;
 
-    const items = await prisma.item.findMany({
-      skip,
-      take: limit,
-    });
+    return await withRetry(async () => {
+      const items = await prisma.item.findMany({
+        skip,
+        take: limit,
+      });
 
-    const totalItems = await prisma.item.count();
-    return {
-      items,
-      totalItems,
-      totalPages: Math.ceil(totalItems / limit),
-      currentPage: page,
-    };
+      const totalItems = await prisma.item.count();
+      return {
+        items,
+        totalItems,
+        totalPages: Math.ceil(totalItems / limit),
+        currentPage: page,
+      };
+    });
   },
 
   async createItem(data) {
     CreateItemSchema.parse(data);
-    return await prisma.item.create({
-      data,
+    return await withRetry(async () => {
+      return await prisma.item.create({
+        data,
+      });
     });
   },
 
   async updataItem(id, data) {
     CreateItemSchema.parse(data);
-    return await prisma.item.update({
-      where: {
-        id,
-      },
-      data,
+    return await withRetry(async () => {
+      return await prisma.item.update({
+        where: {
+          id,
+        },
+        data,
+      });
     });
   },
 
   async deleteItem(id) {
-    return await prisma.item.delete({
-      where: {
-        id,
-      },
+    return await withRetry(async () => {
+      return await prisma.item.delete({
+        where: {
+          id,
+        },
+      });
     });
   },
 
@@ -57,6 +65,8 @@ export const itemService = {
       where.AND.push({ rarity: { contains: rarity } });
     }
 
-    return await prisma.item.findMany({ where });
+    return await withRetry(async () => {
+      return await prisma.item.findMany({ where });
+    });
   },
 };
