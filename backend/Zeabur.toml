@@ -1,0 +1,14 @@
+[build]
+command = "./build.sh"
+
+[deploy]
+startCommand = "node server.js"
+includeFiles = [
+  "app.js",
+  "server.js",
+  "package.json",
+  "prisma/**/*",
+  "src/**/*",
+  ".env",
+  "build.sh"
+] 
