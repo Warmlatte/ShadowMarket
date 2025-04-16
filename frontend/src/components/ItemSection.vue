@@ -1,12 +1,20 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useItemStore } from '@/store/ItemStore'
 
 const itemStore = useItemStore()
 
-const itemModals = ref([])
-const openModal = (index) => {
-  itemModals.value[index].showModal()
+// 確保Map始終是有效的
+const itemModalsMap = ref(new Map())
+
+// 更安全的方式打開模態窗口
+const openModal = (itemId) => {
+  nextTick(() => {
+    const modal = itemModalsMap.value.get(itemId)
+    if (modal) {
+      modal.showModal()
+    }
+  })
 }
 
 const currentPage = computed(() => itemStore.currentPage)
@@ -40,9 +48,28 @@ const displayedItems = computed(() =>
   itemStore.searchItems.length > 0 ? itemStore.searchItems : itemStore.items,
 )
 
+// 當顯示項目變化時，使用新的Map重置而不是改變原始引用
+watch(displayedItems, () => {
+  // 創建新的Map而不是重置現有Map的內容
+  itemModalsMap.value = new Map()
+})
+
 onMounted(() => {
   fetchItems(1)
 })
+
+// 安全的設置模態窗口引用的函數
+const setModalRef = (el, itemId) => {
+  if (!el || !itemId) return
+
+  // 確保map存在
+  if (!itemModalsMap.value) {
+    itemModalsMap.value = new Map()
+  }
+
+  // 設置引用
+  itemModalsMap.value.set(itemId, el)
+}
 </script>
 
 <template>
@@ -78,9 +105,9 @@ onMounted(() => {
           v-if="displayedItems.length > 0"
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          <div v-for="(item, index) in displayedItems" :key="'modal-' + item.id">
+          <div v-for="item in displayedItems" :key="'item-' + item.id">
             <button
-              @click="openModal(index)"
+              @click="openModal(item.id)"
               class="btn btn-ghost w-full h-auto bg-transparent hover:bg-transparent hover:shadow-none p-0"
             >
               <div
@@ -91,7 +118,7 @@ onMounted(() => {
                 </div>
               </div>
             </button>
-            <dialog ref="itemModals" class="modal">
+            <dialog :ref="(el) => setModalRef(el, item.id)" class="modal">
               <div class="modal-box">
                 <div>
                   <div class="flex justify-between">
